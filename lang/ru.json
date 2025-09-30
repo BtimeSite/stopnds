@@ -1,0 +1,18 @@
+{
+    "Welcome title": "ТОКАЕВ ЗАЯВИЛ",
+    "Welcome description": "ЕСЛИ МИЛЛИОН ЧЕЛОВЕК ПОДДЕРЖИТ — ПОВЫШЕНИЕ НДС МОЖЕТ БЫТЬ ОТМЕНЕНО.",
+    "Welcome question": "ОТМЕНИТЬ НДС 16%?",
+    "Welcome author": "Касым-Жомарт Кемелевич Токаев",
+    "News": "Новости",
+    "Kazakhstan": "Казахстан",
+    "Policy": "Политика",
+    "Support": "Поддержать отмену НДС",
+    "Number of votes:": "Количество голосов:",
+    "Your voice will be heard!": "Ваш голос будет услышан!",
+    "The goal to be achieved:": "Цель, которую нужно достичь:",
+    ":count votes": ":count голосов",
+    "Remaining: :count votes": "Осталось: <span id='remainingVotes'>:count</span> голосов",
+    "Share the quiz": "Поделитесь опросом",
+    "Social networks": "Социальные сети",
+    "Your opinion is important for the future of the country.": "Ваше мнение важно для будущего страны"
+}
