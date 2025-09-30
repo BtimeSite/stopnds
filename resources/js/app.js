@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const votesCount = document.getElementById('votesCount');
     const progressBar = document.getElementById('progressBar');
     const remainingVotes = document.getElementById('remainingVotes');
+    const thankYouMessage = document.getElementById('thankYouMessage');
     
     let currentVotes = 0;
     const goalVotes = 1000000;
@@ -98,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 alert(data.message || 'Вы уже голосовали');
             }
+            voteButton.style.display = 'none';
+            thankYouMessage.style.display = 'block';
         })
         .catch(err => {
             console.error(err);

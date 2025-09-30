@@ -14,5 +14,6 @@
     "Remaining: :count votes": "Осталось: <span id='remainingVotes'>:count</span> голосов",
     "Share the quiz": "Поделитесь опросом",
     "Social networks": "Социальные сети",
-    "Your opinion is important for the future of the country.": "Ваше мнение важно для будущего страны"
+    "Your opinion is important for the future of the country.": "Ваше мнение важно для будущего страны",
+    "Thank you for your vote!": "Спасибо за ваш голос!"
 }

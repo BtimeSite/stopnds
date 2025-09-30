@@ -12,6 +12,11 @@
 </head>
 <body>
     <div class="container">
+        <div class="lang-switch-wrap">
+            <a href="/lang/{{ $locale }}" class="lang-switch">
+                {{ $locale }}
+            </a>
+        </div>
         <div class="menu-wrap">
             <div class="menu-item">{{ __('News') }}</div>
             <div class="menu-item">{{ __('Kazakhstan') }}</div>
@@ -30,10 +35,14 @@
     </div>
     <div class="container">
         <div class="poll-card">
-            <button class="vote-button pulse" id="voteButton">
+            <button class="vote-button pulse" id="voteButton" @if($voted) style="display: none;" @endif>
                 <i class="fas fa-hand"></i>
                 <span>{{ __('Support') }}</span>
             </button>
+
+            <div class="thank-you" id="thankYouMessage" @if($voted) style="display: block;" @else style="display: none;"  @endif>
+                {{ __('Thank you for your vote!') }}
+            </div>
             
             <div class="vote-count">
                 {{__('Number of votes:')}}
@@ -57,28 +66,40 @@
         <div class="share-section">
             <div class="share-title">{{ __('Share the quiz') }}</div>
             <div class="share-buttons">
-                <button class="share-button">
+                <a class="share-button"
+                href="https://wa.me/?text={{ urlencode(request()->fullUrl()) }}"
+                target="_blank" rel="noopener">
                     <i class="fab fa-whatsapp"></i> WhatsApp
-                </button>
-                <button class="share-button">
+                </a>
+
+                <a class="share-button"
+                href="https://t.me/share/url?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode(__('Welcome question')) }}"
+                target="_blank" rel="noopener">
                     <i class="fab fa-telegram"></i> Telegram
-                </button>
-                <button class="share-button">
+                </a>
+
+                <a class="share-button"
+                href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
+                target="_blank" rel="noopener">
                     <i class="fab fa-facebook"></i> Facebook
-                </button>
-                <button class="share-button">
+                </a>
+
+                <a class="share-button"
+                href="https://www.threads.net/intent/post?text={{ urlencode(__('Take this quiz!').' '.request()->fullUrl()) }}"
+                target="_blank" rel="noopener">
                     <i class="fab fa-threads"></i> Threads
-                </button>
+                </a>
             </div>
         </div>
+
 
         <div class="social-section">
             <div class="social-title">{{ __('Social networks') }}</div>
             <div class="social-icons">
-                <div class="social-icon"><i class="fab fa-instagram"></i></div>
-                <div class="social-icon"><i class="fab fa-telegram"></i></div>
-                <div class="social-icon"><i class="fab fa-youtube"></i></div>
-                <div class="social-icon"><i class="fab fa-threads"></i></div>
+                <a href="https://www.instagram.com/ablyazovmk1/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://t.me/freekazakhstanbot" class="social-icon"><i class="fab fa-telegram"></i></a>
+                <a href="https://www.youtube.com/@Ablyazovlive" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.threads.com/@ablyazovmk1" class="social-icon"><i class="fab fa-threads"></i></a>
             </div>
         </div>
         
