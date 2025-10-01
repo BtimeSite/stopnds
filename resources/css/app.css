@@ -107,12 +107,19 @@ body {
     box-shadow: 0 4px 10px rgba(255, 75, 43, 0.4);
 }
 
+.vote-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
 .vote-button {
-    width: 100%;
+    flex: 1;
     padding: 18px;
     border: none;
     border-radius: 12px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -120,16 +127,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 25px;
+    gap: 8px;
     background: linear-gradient(to right, #4CAF50, #8BC34A);
     color: white;
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
 }
 
+.vote-button.negative {
+    background: linear-gradient(to right, #f44336, #e57373);
+    box-shadow: 0 6px 20px rgba(244, 67, 54, 0.5);
+}
+
 .vote-button:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.7);
 }
 
 .vote-button:active {
@@ -137,20 +147,25 @@ body {
 }
 
 .vote-button i {
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
-.vote-count {
+.vote-counts {
     text-align: center;
     margin-top: 15px;
 }
 
-.votes-number {
-    font-size: 2.8rem;
-    font-weight: 800;
+.vote-row {
+    display: flex;
+    justify-content: space-between;
     margin: 10px 0;
-    color: #ffeb3b;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-size: 1.0rem;
+    font-weight: 700;
+}
+
+.vote-row span {
+    font-weight: 800;
+    letter-spacing: 0.1em;
 }
 
 .goal {
@@ -291,7 +306,7 @@ body {
 
 .state-hearing {
     font-style: italic;
-    margin-top: 10px;
+    margin-top: 20px;
     opacity: 0.9;
     font-size: 1.1rem;
     text-align: center;

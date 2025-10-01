@@ -24,31 +24,39 @@ Route::get('/', function (Request $request) {
 });
 
 Route::get('/votes', function () {
-    $votes = DB::table('polls')->where('id', 1)->value('votes');
+    $poll = DB::table('polls')->where('id', 1)->first();
+
     return response()->json([
-        'success' => true,
-        'votes'   => $votes,
+        'success'   => true,
+        'votes_yes' => $poll->votes_yes ?? 0,
+        'votes_no'  => $poll->votes_no ?? 0,
     ]);
 });
 
 Route::post('vote', function (Request $request) {
     $ip = $request->ip();
+    $choice = $request->input('choice');
+
     if (Cache::has("voted:{$ip}") || $request->session()->has('voted')) {
         return response()->json([
             'success' => false,
             'message' => 'Вы уже голосовали в этой сессии'
-        ], 403);
+        ]);
     }
-    DB::table('polls')->where('id', 1)->increment('votes');
 
-    // Сохраняем IP на 1 час
+    if (!in_array($choice, ['yes', 'no'])) {
+        return response()->json(['success' => false, 'message' => 'Неверный выбор'], 400);
+    }
+
+    DB::table('polls')->where('id', 1)->increment("votes_{$choice}");
+
     Cache::put("voted:{$ip}", true, now()->addHour());
-    // Сохраняем отметку в сессии
-    $request->session()->put('voted', true);
+
+    $poll = DB::table('polls')->where('id', 1)->first();
 
     return response()->json([
-        'success' => true,
-        'message' => 'Голос засчитан',
-        'votes'   => DB::table('polls')->where('id', 1)->value('votes'),
+        'success'   => true,
+        'votes_yes' => $poll->votes_yes,
+        'votes_no'  => $poll->votes_no,
     ]);
 });

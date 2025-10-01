@@ -35,18 +35,30 @@
     </div>
     <div class="container">
         <div class="poll-card">
-            <button class="vote-button pulse" id="voteButton" @if($voted) style="display: none;" @endif>
-                <i class="fas fa-hand"></i>
-                <span>{{ __('Support') }}</span>
-            </button>
+            <div class="vote-buttons" @if($voted) style="display:none;" @endif>
+                <button class="vote-button" id="voteYes">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>{{ __('Support') }}</span>
+                </button>
+                <button class="vote-button negative" id="voteNo">
+                    <i class="fas fa-thumbs-down"></i>
+                    <span>{{ __('Against') }}</span>
+                </button>
+            </div>
 
-            <div class="thank-you" id="thankYouMessage" @if($voted) style="display: block;" @else style="display: none;"  @endif>
+            <div class="thank-you" id="thankYouMessage" @if($voted) style="display:block;" @else style="display:none;" @endif>
                 {{ __('Thank you for your vote!') }}
             </div>
-            
-            <div class="vote-count">
-                {{__('Number of votes:')}}
-                <div class="votes-number" id="votesCount"></div>
+
+            <div class="vote-counts">
+                <div class="vote-row">
+                    <div>{{ __('Support') }}:</div>
+                    <span id="votesYes">0</span>
+                </div>
+                <div class="vote-row">
+                    <div>{{ __('Against') }}:</div>
+                    <span id="votesNo">0</span>
+                </div>
             </div>
             
             <div class="state-hearing">

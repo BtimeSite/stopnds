@@ -1,20 +1,27 @@
 import './bootstrap';
 
 document.addEventListener('DOMContentLoaded', function() {
-    const voteButton = document.getElementById('voteButton');
-    const votesCount = document.getElementById('votesCount');
+    const voteButtons = document.querySelector('.vote-buttons');
+    const voteYesBtn = document.getElementById('voteYes');
+    const voteNoBtn = document.getElementById('voteNo');
+    const votesYesCount = document.getElementById('votesYes');
+    const votesNoCount = document.getElementById('votesNo');
+
     const progressBar = document.getElementById('progressBar');
     const remainingVotes = document.getElementById('remainingVotes');
     const thankYouMessage = document.getElementById('thankYouMessage');
     
-    let currentVotes = 0;
+    let currentYesVotes = 0;
+    let currentNoVotes = 0;
     const goalVotes = 1000000;
 
     axios.get('/votes')
         .then(({data}) => {
             if (data.success) {
-                currentVotes = data.votes;
-                votesCount.textContent = currentVotes.toLocaleString();
+                currentYesVotes = data.votes_yes;
+                currentNoVotes = data.votes_no;
+                votesYesCount.textContent = currentYesVotes.toLocaleString();
+                votesNoCount.textContent = currentNoVotes.toLocaleString();
                 updateProgress();
             }
         })
@@ -24,9 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Обновляем прогресс бар
     function updateProgress() {
-        const progressPercentage = (currentVotes / goalVotes) * 100;
+        const progressPercentage = (currentYesVotes / goalVotes) * 100;
         progressBar.style.width = `${Math.min(progressPercentage, 100)}%`;
-        remainingVotes.textContent = (goalVotes - currentVotes).toLocaleString();
+        remainingVotes.textContent = (goalVotes - currentYesVotes).toLocaleString();
     }
     
     // Анимация при голосовании
@@ -75,23 +82,31 @@ document.addEventListener('DOMContentLoaded', function() {
             }, duration * 1000);
         }
     }
-    
-    // Обработчик голосования
-    voteButton.addEventListener('click', function() {
-        axios.post('/vote')
+
+    function sendVote(choice)
+    {
+        axios.post('/vote', {
+            choice
+        })
         .then(({data}) => {
             if (data.success) {
-                currentVotes = data.votes; // получаем число голосов с бэкенда
-                votesCount.textContent = currentVotes.toLocaleString();
+                currentYesVotes = data.votes_yes;
+                currentNoVotes = data.votes_no;
+                votesYesCount.textContent = currentYesVotes.toLocaleString();
+                votesNoCount.textContent = currentNoVotes.toLocaleString();
 
                 // обновляем прогресс
                 updateProgress();
 
                 // анимация
-                animateVote(voteButton);
+                if(choice == 'yes'){
+                    animateVote(voteYesBtn);
+                }else {
+                    animateVote(voteNoBtn);
+                }
 
                 // цель достигнута
-                if (currentVotes >= goalVotes) {
+                if (currentYesVotes >= goalVotes) {
                     setTimeout(() => {
                         alert('Цель достигнута! 1,000,000 голосов собрано! Спасибо за участие!');
                     }, 800);
@@ -99,14 +114,18 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 alert(data.message || 'Вы уже голосовали');
             }
-            voteButton.style.display = 'none';
+            voteButtons.style.display = 'none';
             thankYouMessage.style.display = 'block';
         })
         .catch(err => {
             console.error(err);
             alert('Ошибка при отправке голоса');
         });
-    });
+    }
+    
+    // Обработчик голосования
+    voteYesBtn.addEventListener('click', () => sendVote('yes'));
+    voteNoBtn.addEventListener('click', () => sendVote('no'));
     
     // Инициализация прогресс бара
     updateProgress();

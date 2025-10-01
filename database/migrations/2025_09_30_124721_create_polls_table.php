@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('polls', function (Blueprint $table) {
             $table->id();
             $table->string('question');
-            $table->unsignedBigInteger('votes')->default(0);
+            $table->unsignedBigInteger('votes_yes')->default(0);
+            $table->unsignedBigInteger('votes_no')->default(0);
             $table->timestamps();
         });
     }
