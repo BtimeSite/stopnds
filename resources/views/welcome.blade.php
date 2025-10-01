@@ -46,7 +46,7 @@
             
             <div class="vote-count">
                 {{__('Number of votes:')}}
-                <div class="votes-number" id="votesCount">728,459</div>
+                <div class="votes-number" id="votesCount"></div>
             </div>
             
             <div class="state-hearing">
