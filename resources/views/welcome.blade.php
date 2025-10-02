@@ -118,6 +118,9 @@
         <div class="footer">
             {{ __('Your opinion is important for the future of the country.') }}
         </div>
+        <div class="footer">
+            {{ request()->ip() }}
+        </div>
     </div>
 </body>
 </html>

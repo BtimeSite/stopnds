@@ -16,7 +16,7 @@ Route::get('lang/{locale}', function ($locale) {
 Route::get('/', function (Request $request) {
     $ip = $request->ip();
     $voted = false;
-    if (Cache::has("voted:{$ip}") || $request->session()->has('voted')) {
+    if (Cache::has("voted:{$ip}") || $request->cookie("voted")) {
         $voted = true;
     }
     $locale = App::getLocale() == 'ru' ? 'kk' : 'ru';
@@ -33,11 +33,11 @@ Route::get('/votes', function () {
     ]);
 });
 
-Route::post('vote', function (Request $request) {
+Route::middleware('throttle:5,1')->post('vote', function (Request $request) {
     $ip = $request->ip();
     $choice = $request->input('choice');
 
-    if (Cache::has("voted:{$ip}") || $request->session()->has('voted')) {
+    if (Cache::has("voted:{$ip}") || $request->cookie("voted")) {
         return response()->json([
             'success' => false,
             'message' => 'Вы уже голосовали в этой сессии'
@@ -50,7 +50,7 @@ Route::post('vote', function (Request $request) {
 
     DB::table('polls')->where('id', 1)->increment("votes_{$choice}");
 
-    Cache::put("voted:{$ip}", true, now()->addHour());
+    Cache::put("voted:{$ip}", true, now()->addDay());
 
     $poll = DB::table('polls')->where('id', 1)->first();
 
@@ -58,5 +58,5 @@ Route::post('vote', function (Request $request) {
         'success'   => true,
         'votes_yes' => $poll->votes_yes,
         'votes_no'  => $poll->votes_no,
-    ]);
+    ])->cookie('voted', true, 1440);
 });
