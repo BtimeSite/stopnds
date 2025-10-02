@@ -12,7 +12,6 @@ body {
     background-size: cover;
 }
 .lang-switch-wrap {
-    margin-bottom: 20px;
     text-align: right;
 }
 .lang-switch {
@@ -52,7 +51,7 @@ body {
 }
 
 .header {
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .header h1 {
@@ -84,13 +83,12 @@ body {
     width: 100%;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    margin-top: 15px;
 }
 
 .question {
     font-size: 16px;
     font-weight: 700;
-    margin-top: 15px;
+    text-align: center;
 }
 .author {
     font-size: 12px;

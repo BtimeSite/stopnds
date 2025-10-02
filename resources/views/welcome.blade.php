@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Опрос: Отменить НДС 16%?</title>
+    {{-- OpenGraph --}}
+    <meta property="og:title" content="{{ __('OG Title') }}">
+    <meta property="og:description" content="{{ __('OG Description') }}">
+    <meta property="og:image" content="{{ asset('images/tokaev.jpg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    {{-- Twitter Card (чтобы красиво смотрелось в X/Twitter) --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ __('OG Title') }}">
+    <meta name="twitter:description" content="{{ __('OG Description') }}">
+    <meta name="twitter:image" content="{{ asset('images/tokaev.jpg') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -17,23 +30,14 @@
                 {{ $locale }}
             </a>
         </div>
-        <div class="menu-wrap">
-            <div class="menu-item">{{ __('News') }}</div>
-            <div class="menu-item">{{ __('Kazakhstan') }}</div>
-            <div class="menu-item">{{ __('Policy') }}</div>
-        </div>
-        <div class="header">
-            <div class="title">{{ __('Welcome title') }}</div>
-            <div class="highlight">{{ __('Welcome description') }}</div>
-            <div class="question">{{ __('Welcome question') }}</div>
-            <div class="author">{{ __('Welcome author') }}</div>
-            
-        </div>
     </div>
     <div class="logo">
     <img src="/images/tokaev.jpg" style="width: 100%; max-width: 500px;" alt="tokaev" />
-    </div>
+    </div>    
     <div class="container">
+        <div class="header">
+            <div class="question">{{ __('Welcome question') }}</div>            
+        </div>
         <div class="poll-card">
             <div class="vote-buttons" @if($voted) style="display:none;" @endif>
                 <button class="vote-button" id="voteYes">
