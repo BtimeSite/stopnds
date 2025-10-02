@@ -13,6 +13,16 @@ Route::get('lang/{locale}', function ($locale) {
     return redirect()->back();
 });
 
+Route::get('/create16', function () {
+    DB::table('polls')->insert([
+        'question' => 'Вы против НДС 16%?', 
+        'votes_yes' => 0,
+        'votes_no' => 0,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+});
+
 Route::get('/', function (Request $request) {
     $ip = $request->ip();
     $voted = false;
