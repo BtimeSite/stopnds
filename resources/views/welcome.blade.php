@@ -7,7 +7,7 @@
     {{-- OpenGraph --}}
     <meta property="og:title" content="{{ __('OG Title') }}">
     <meta property="og:description" content="{{ __('OG Description') }}">
-    <meta property="og:image" content="{{ asset('images/tokaev.jpg') }}">
+    <meta property="og:image" content="{{ asset('images/tokaev1.jpg') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
 
@@ -15,7 +15,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ __('OG Title') }}">
     <meta name="twitter:description" content="{{ __('OG Description') }}">
-    <meta name="twitter:image" content="{{ asset('images/tokaev.jpg') }}">
+    <meta name="twitter:image" content="{{ asset('images/tokaev1.jpg') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="logo">
-    <img src="/images/tokaev.jpg" style="width: 100%; max-width: 500px;" alt="tokaev" />
+    <img src="/images/tokaev1.jpg" style="width: 100%; max-width: 500px;" alt="tokaev" />
     </div>    
     <div class="container">
         <div class="header">
